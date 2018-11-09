@@ -4,5 +4,9 @@ import { TypeMap } from './types/TypeMap';
 export interface QueryParent {}
 
 export const Query: QueryResolvers.Type<TypeMap> = {
-    hi: async (parent, args, ctx, info) => null,
-};
+    tasks: (parent1, args, ctx) => {
+        return ctx.db.tasks();
+    },
+}
+
+

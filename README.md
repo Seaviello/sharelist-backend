@@ -6,5 +6,6 @@
 
 ## Normal development
 * `docker-compose start` - start the docker container with database
-* `prisma deploy` - for adding the changes to the prisma server inside container
-* `prisma generate` - to create the grapql schema for client usage
+* `npm run prisma -- deploy` - for adding the changes to the prisma server inside container, updates the database
+* `npm run prisma -- generate` - to create the grapql schema for client usage
+* `npm run dev` - starts listening to graphql and ts changes

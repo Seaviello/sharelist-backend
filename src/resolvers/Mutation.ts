@@ -4,5 +4,7 @@ import { TypeMap } from './types/TypeMap';
 export interface MutationParent {}
 
 export const Mutation: MutationResolvers.Type<TypeMap> = {
-    hi: parent => null,
+    createTask: async (parent1, args, ctx, info) => {
+        return ctx.db.createTask({...args.data});
+    }
 };

@@ -1,7 +1,9 @@
+# import * from './generated/prisma.graphql'
+
 type Mutation {
-    hi: String
+    createTask(data: TaskCreateInput!): Task!
 }
 
 type Query {
-    hi: String
+    tasks: [Task!]!
 }
