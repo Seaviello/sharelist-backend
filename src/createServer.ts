@@ -11,7 +11,7 @@ export function createServer() {
         resolvers: {
             Mutation,
             Query,
-        },
+        } as any,
         context: req => ({ ...req, db }),
     });
 }

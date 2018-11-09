@@ -2,14 +2,15 @@
   "name": "sharelist",
   "version": "1.0.0",
   "scripts": {
-    "dev": "npm-run-all --parallel start playground",
+    "dev": "npm-run-all --parallel start playground resolver-codegen:watch",
     "start": "nodemon -e ts,graphql -x ts-node --no-cache -r dotenv/config src/index.ts",
     "playground": "graphql playground",
     "build": "rm -rf dist && graphql codegen && tsc",
     "prisma": "prisma",
     "resolver-interfaces": "graphql-resolver-codegen interfaces -s src/schema.graphql -o ./src/generated/resolvers.ts",
     "resolver-scaffold": "graphql-resolver-codegen scaffold -s src/schema.graphql -o ./src/resolvers/ -i ../generated/resolvers",
-    "resolver-codegen": "npm-run-all resolver-interfaces resolver-scaffold"
+    "resolver-codegen": "npm-run-all resolver-interfaces resolver-scaffold",
+    "resolver-codegen:watch": "nodemon -e graphql -x npm run resolver-codegen"
   },
   "dependencies": {
     "bcryptjs": "2.4.3",
