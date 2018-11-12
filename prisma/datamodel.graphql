@@ -1,16 +1,73 @@
+enum PermissionType {
+    ADMIN # add new users, delete items, delete list + EDITOR
+    EDITOR # add new item, edit item, remove item, edit list + READONLY
+    READONLY # view list, view item
+}
+
+enum ListType {
+    INVENTORY
+    CHECKLIST # should not be used yet
+}
+
+enum Unit {
+    COUNT
+    MG
+    ML
+}
+
+enum StockStatus {
+    AVAILABLE
+    LIMITED
+    OUT
+}
+
 type User {
     id: ID! @unique
     name: String!
-    email: String!
+    email: String! @unique
+    password: String!
+    resetToken: String
+    resetTokenExpiry: Float
+    lists: [List!]! @relation(name: "ListsOwner" onDelete: CASCADE)
+    items: [Item!]! @relation(name: "ItemsOwner" onDelete: CASCADE)
+    permissions: [Permission!]! @relation(name: "UserListPermission" onDelete: CASCADE)
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
-type Task {
+type Permission {
     id: ID! @unique
-    createdAt: DateTime!
+    userId: User! @relation(name: "UserListPermission")
+    listId: List! @relation(name: "ListPermission")
+    type: PermissionType!
+}
+
+type List {
+    id: ID! @unique
     title: String!
-    # creator: User!
-    # owner: User!
-    # updatedAt: DateTime!
-    # expireAt: DateTime!
-    # description: String!
+    type: ListType!
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    owner: User! @relation(name: "ListsOwner")
+    permissions: [Permission!]! @relation(name: "ListPermission" onDelete: CASCADE)
+    parentList: List
+    items: [Item!]!
+}
+
+type Stock {
+    id: ID! @unique
+    listId: List!
+    itemId: Item!
+    quantity: Int
+    status: StockStatus
+    unit: Unit
+}
+
+type Item {
+    id: ID! @unique
+    title: String!
+    description: String
+    createdAt: DateTime!
+    updatedAt: DateTime!
+    owner: User! @relation(name: "ItemsOwner")
 }

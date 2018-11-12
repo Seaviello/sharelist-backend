@@ -11,7 +11,10 @@ type AtLeastOne<T, U = { [K in keyof T]: Pick<T, K> }> = Partial<T> &
   U[keyof U];
 
 export interface Exists {
-  task: (where?: TaskWhereInput) => Promise<boolean>;
+  item: (where?: ItemWhereInput) => Promise<boolean>;
+  list: (where?: ListWhereInput) => Promise<boolean>;
+  permission: (where?: PermissionWhereInput) => Promise<boolean>;
+  stock: (where?: StockWhereInput) => Promise<boolean>;
   user: (where?: UserWhereInput) => Promise<boolean>;
 }
 
@@ -34,29 +37,98 @@ export interface Prisma {
    * Queries
    */
 
-  task: (where: TaskWhereUniqueInput) => Task;
-  tasks: (
+  item: (where: ItemWhereUniqueInput) => Item;
+  items: (
     args?: {
-      where?: TaskWhereInput;
-      orderBy?: TaskOrderByInput;
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
       skip?: Int;
       after?: String;
       before?: String;
       first?: Int;
       last?: Int;
     }
-  ) => FragmentableArray<TaskNode>;
-  tasksConnection: (
+  ) => FragmentableArray<ItemNode>;
+  itemsConnection: (
     args?: {
-      where?: TaskWhereInput;
-      orderBy?: TaskOrderByInput;
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
       skip?: Int;
       after?: String;
       before?: String;
       first?: Int;
       last?: Int;
     }
-  ) => TaskConnection;
+  ) => ItemConnection;
+  list: (where: ListWhereUniqueInput) => List;
+  lists: (
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<ListNode>;
+  listsConnection: (
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => ListConnection;
+  permission: (where: PermissionWhereUniqueInput) => Permission;
+  permissions: (
+    args?: {
+      where?: PermissionWhereInput;
+      orderBy?: PermissionOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<PermissionNode>;
+  permissionsConnection: (
+    args?: {
+      where?: PermissionWhereInput;
+      orderBy?: PermissionOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => PermissionConnection;
+  stock: (where: StockWhereUniqueInput) => Stock;
+  stocks: (
+    args?: {
+      where?: StockWhereInput;
+      orderBy?: StockOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => FragmentableArray<StockNode>;
+  stocksConnection: (
+    args?: {
+      where?: StockWhereInput;
+      orderBy?: StockOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => StockConnection;
   user: (where: UserWhereUniqueInput) => User;
   users: (
     args?: {
@@ -86,22 +158,70 @@ export interface Prisma {
    * Mutations
    */
 
-  createTask: (data: TaskCreateInput) => Task;
-  updateTask: (
-    args: { data: TaskUpdateInput; where: TaskWhereUniqueInput }
-  ) => Task;
-  updateManyTasks: (
-    args: { data: TaskUpdateInput; where?: TaskWhereInput }
+  createItem: (data: ItemCreateInput) => Item;
+  updateItem: (
+    args: { data: ItemUpdateInput; where: ItemWhereUniqueInput }
+  ) => Item;
+  updateManyItems: (
+    args: { data: ItemUpdateInput; where?: ItemWhereInput }
   ) => BatchPayload;
-  upsertTask: (
+  upsertItem: (
     args: {
-      where: TaskWhereUniqueInput;
-      create: TaskCreateInput;
-      update: TaskUpdateInput;
+      where: ItemWhereUniqueInput;
+      create: ItemCreateInput;
+      update: ItemUpdateInput;
     }
-  ) => Task;
-  deleteTask: (where: TaskWhereUniqueInput) => Task;
-  deleteManyTasks: (where?: TaskWhereInput) => BatchPayload;
+  ) => Item;
+  deleteItem: (where: ItemWhereUniqueInput) => Item;
+  deleteManyItems: (where?: ItemWhereInput) => BatchPayload;
+  createList: (data: ListCreateInput) => List;
+  updateList: (
+    args: { data: ListUpdateInput; where: ListWhereUniqueInput }
+  ) => List;
+  updateManyLists: (
+    args: { data: ListUpdateInput; where?: ListWhereInput }
+  ) => BatchPayload;
+  upsertList: (
+    args: {
+      where: ListWhereUniqueInput;
+      create: ListCreateInput;
+      update: ListUpdateInput;
+    }
+  ) => List;
+  deleteList: (where: ListWhereUniqueInput) => List;
+  deleteManyLists: (where?: ListWhereInput) => BatchPayload;
+  createPermission: (data: PermissionCreateInput) => Permission;
+  updatePermission: (
+    args: { data: PermissionUpdateInput; where: PermissionWhereUniqueInput }
+  ) => Permission;
+  updateManyPermissions: (
+    args: { data: PermissionUpdateInput; where?: PermissionWhereInput }
+  ) => BatchPayload;
+  upsertPermission: (
+    args: {
+      where: PermissionWhereUniqueInput;
+      create: PermissionCreateInput;
+      update: PermissionUpdateInput;
+    }
+  ) => Permission;
+  deletePermission: (where: PermissionWhereUniqueInput) => Permission;
+  deleteManyPermissions: (where?: PermissionWhereInput) => BatchPayload;
+  createStock: (data: StockCreateInput) => Stock;
+  updateStock: (
+    args: { data: StockUpdateInput; where: StockWhereUniqueInput }
+  ) => Stock;
+  updateManyStocks: (
+    args: { data: StockUpdateInput; where?: StockWhereInput }
+  ) => BatchPayload;
+  upsertStock: (
+    args: {
+      where: StockWhereUniqueInput;
+      create: StockCreateInput;
+      update: StockUpdateInput;
+    }
+  ) => Stock;
+  deleteStock: (where: StockWhereUniqueInput) => Stock;
+  deleteManyStocks: (where?: StockWhereInput) => BatchPayload;
   createUser: (data: UserCreateInput) => User;
   updateUser: (
     args: { data: UserUpdateInput; where: UserWhereUniqueInput }
@@ -127,9 +247,18 @@ export interface Prisma {
 }
 
 export interface Subscription {
-  task: (
-    where?: TaskSubscriptionWhereInput
-  ) => TaskSubscriptionPayloadSubscription;
+  item: (
+    where?: ItemSubscriptionWhereInput
+  ) => ItemSubscriptionPayloadSubscription;
+  list: (
+    where?: ListSubscriptionWhereInput
+  ) => ListSubscriptionPayloadSubscription;
+  permission: (
+    where?: PermissionSubscriptionWhereInput
+  ) => PermissionSubscriptionPayloadSubscription;
+  stock: (
+    where?: StockSubscriptionWhereInput
+  ) => StockSubscriptionPayloadSubscription;
   user: (
     where?: UserSubscriptionWhereInput
   ) => UserSubscriptionPayloadSubscription;
@@ -143,13 +272,55 @@ export interface ClientConstructor<T> {
  * Types
  */
 
-export type TaskOrderByInput =
+export type PermissionType = "ADMIN" | "EDITOR" | "READONLY";
+
+export type ListOrderByInput =
   | "id_ASC"
   | "id_DESC"
-  | "createdAt_ASC"
-  | "createdAt_DESC"
   | "title_ASC"
   | "title_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ListType = "INVENTORY" | "CHECKLIST";
+
+export type PermissionOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "type_ASC"
+  | "type_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type ItemOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "title_ASC"
+  | "title_DESC"
+  | "description_ASC"
+  | "description_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
+  | "updatedAt_ASC"
+  | "updatedAt_DESC";
+
+export type Unit = "COUNT" | "MG" | "ML";
+
+export type StockOrderByInput =
+  | "id_ASC"
+  | "id_DESC"
+  | "quantity_ASC"
+  | "quantity_DESC"
+  | "unit_ASC"
+  | "unit_DESC"
+  | "createdAt_ASC"
+  | "createdAt_DESC"
   | "updatedAt_ASC"
   | "updatedAt_DESC";
 
@@ -160,6 +331,12 @@ export type UserOrderByInput =
   | "name_DESC"
   | "email_ASC"
   | "email_DESC"
+  | "password_ASC"
+  | "password_DESC"
+  | "resetToken_ASC"
+  | "resetToken_DESC"
+  | "resetTokenExpiry_ASC"
+  | "resetTokenExpiry_DESC"
   | "createdAt_ASC"
   | "createdAt_DESC"
   | "updatedAt_ASC"
@@ -167,9 +344,62 @@ export type UserOrderByInput =
 
 export type MutationType = "CREATED" | "UPDATED" | "DELETED";
 
-export interface UserCreateInput {
-  name: String;
-  email: String;
+export interface ItemCreateManyInput {
+  create?: ItemCreateInput[] | ItemCreateInput;
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+}
+
+export type ItemWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface ListUpdateWithoutOwnerDataInput {
+  title?: String;
+  type?: ListType;
+  permissions?: PermissionUpdateManyWithoutListIdInput;
+  parentList?: ListUpdateOneInput;
+  items?: ItemUpdateManyInput;
+}
+
+export interface PermissionWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  userId?: UserWhereInput;
+  listId?: ListWhereInput;
+  type?: PermissionType;
+  type_not?: PermissionType;
+  type_in?: PermissionType[] | PermissionType;
+  type_not_in?: PermissionType[] | PermissionType;
+  AND?: PermissionWhereInput[] | PermissionWhereInput;
+  OR?: PermissionWhereInput[] | PermissionWhereInput;
+  NOT?: PermissionWhereInput[] | PermissionWhereInput;
+}
+
+export interface PermissionUpdateManyWithoutListIdInput {
+  create?:
+    | PermissionCreateWithoutListIdInput[]
+    | PermissionCreateWithoutListIdInput;
+  delete?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+  connect?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+  disconnect?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+  update?:
+    | PermissionUpdateWithWhereUniqueWithoutListIdInput[]
+    | PermissionUpdateWithWhereUniqueWithoutListIdInput;
+  upsert?:
+    | PermissionUpsertWithWhereUniqueWithoutListIdInput[]
+    | PermissionUpsertWithWhereUniqueWithoutListIdInput;
 }
 
 export interface UserWhereInput {
@@ -215,55 +445,313 @@ export interface UserWhereInput {
   email_not_starts_with?: String;
   email_ends_with?: String;
   email_not_ends_with?: String;
+  password?: String;
+  password_not?: String;
+  password_in?: String[] | String;
+  password_not_in?: String[] | String;
+  password_lt?: String;
+  password_lte?: String;
+  password_gt?: String;
+  password_gte?: String;
+  password_contains?: String;
+  password_not_contains?: String;
+  password_starts_with?: String;
+  password_not_starts_with?: String;
+  password_ends_with?: String;
+  password_not_ends_with?: String;
+  resetToken?: String;
+  resetToken_not?: String;
+  resetToken_in?: String[] | String;
+  resetToken_not_in?: String[] | String;
+  resetToken_lt?: String;
+  resetToken_lte?: String;
+  resetToken_gt?: String;
+  resetToken_gte?: String;
+  resetToken_contains?: String;
+  resetToken_not_contains?: String;
+  resetToken_starts_with?: String;
+  resetToken_not_starts_with?: String;
+  resetToken_ends_with?: String;
+  resetToken_not_ends_with?: String;
+  resetTokenExpiry?: Float;
+  resetTokenExpiry_not?: Float;
+  resetTokenExpiry_in?: Float[] | Float;
+  resetTokenExpiry_not_in?: Float[] | Float;
+  resetTokenExpiry_lt?: Float;
+  resetTokenExpiry_lte?: Float;
+  resetTokenExpiry_gt?: Float;
+  resetTokenExpiry_gte?: Float;
+  lists_every?: ListWhereInput;
+  lists_some?: ListWhereInput;
+  lists_none?: ListWhereInput;
+  items_every?: ItemWhereInput;
+  items_some?: ItemWhereInput;
+  items_none?: ItemWhereInput;
+  permissions_every?: PermissionWhereInput;
+  permissions_some?: PermissionWhereInput;
+  permissions_none?: PermissionWhereInput;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
   AND?: UserWhereInput[] | UserWhereInput;
   OR?: UserWhereInput[] | UserWhereInput;
   NOT?: UserWhereInput[] | UserWhereInput;
 }
 
-export type TaskWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export type UserWhereUniqueInput = AtLeastOne<{
-  id: ID_Input;
-}>;
-
-export interface TaskSubscriptionWhereInput {
-  mutation_in?: MutationType[] | MutationType;
-  updatedFields_contains?: String;
-  updatedFields_contains_every?: String[] | String;
-  updatedFields_contains_some?: String[] | String;
-  node?: TaskWhereInput;
-  AND?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-  OR?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
-  NOT?: TaskSubscriptionWhereInput[] | TaskSubscriptionWhereInput;
+export interface UserCreateWithoutPermissionsInput {
+  name: String;
+  email: String;
+  password: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  lists?: ListCreateManyWithoutOwnerInput;
+  items?: ItemCreateManyWithoutOwnerInput;
 }
 
-export interface TaskCreateInput {
+export interface ItemUpdateManyInput {
+  create?: ItemCreateInput[] | ItemCreateInput;
+  update?:
+    | ItemUpdateWithWhereUniqueNestedInput[]
+    | ItemUpdateWithWhereUniqueNestedInput;
+  upsert?:
+    | ItemUpsertWithWhereUniqueNestedInput[]
+    | ItemUpsertWithWhereUniqueNestedInput;
+  delete?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+  disconnect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+}
+
+export interface ItemCreateManyWithoutOwnerInput {
+  create?: ItemCreateWithoutOwnerInput[] | ItemCreateWithoutOwnerInput;
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+}
+
+export interface PermissionUpdateWithWhereUniqueWithoutListIdInput {
+  where: PermissionWhereUniqueInput;
+  data: PermissionUpdateWithoutListIdDataInput;
+}
+
+export interface ItemCreateWithoutOwnerInput {
   title: String;
+  description?: String;
 }
 
-export interface TaskUpdateInput {
-  title?: String;
-}
-
-export interface UserSubscriptionWhereInput {
+export interface StockSubscriptionWhereInput {
   mutation_in?: MutationType[] | MutationType;
   updatedFields_contains?: String;
   updatedFields_contains_every?: String[] | String;
   updatedFields_contains_some?: String[] | String;
-  node?: UserWhereInput;
-  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
-  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  node?: StockWhereInput;
+  AND?: StockSubscriptionWhereInput[] | StockSubscriptionWhereInput;
+  OR?: StockSubscriptionWhereInput[] | StockSubscriptionWhereInput;
+  NOT?: StockSubscriptionWhereInput[] | StockSubscriptionWhereInput;
+}
+
+export interface ListCreateOneInput {
+  create?: ListCreateInput;
+  connect?: ListWhereUniqueInput;
+}
+
+export interface ListSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ListWhereInput;
+  AND?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput;
+  OR?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput;
+  NOT?: ListSubscriptionWhereInput[] | ListSubscriptionWhereInput;
+}
+
+export interface ListCreateInput {
+  title: String;
+  type: ListType;
+  owner: UserCreateOneWithoutListsInput;
+  permissions?: PermissionCreateManyWithoutListIdInput;
+  parentList?: ListCreateOneInput;
+  items?: ItemCreateManyInput;
 }
 
 export interface UserUpdateInput {
   name?: String;
   email?: String;
+  password?: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  lists?: ListUpdateManyWithoutOwnerInput;
+  items?: ItemUpdateManyWithoutOwnerInput;
+  permissions?: PermissionUpdateManyWithoutUserIdInput;
 }
 
-export interface TaskWhereInput {
+export interface UserCreateOneWithoutListsInput {
+  create?: UserCreateWithoutListsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export type ListWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface UserCreateWithoutListsInput {
+  name: String;
+  email: String;
+  password: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  items?: ItemCreateManyWithoutOwnerInput;
+  permissions?: PermissionCreateManyWithoutUserIdInput;
+}
+
+export interface ItemUpdateOneRequiredInput {
+  create?: ItemCreateInput;
+  update?: ItemUpdateDataInput;
+  upsert?: ItemUpsertNestedInput;
+  connect?: ItemWhereUniqueInput;
+}
+
+export interface PermissionCreateManyWithoutUserIdInput {
+  create?:
+    | PermissionCreateWithoutUserIdInput[]
+    | PermissionCreateWithoutUserIdInput;
+  connect?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+}
+
+export type PermissionWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface PermissionCreateWithoutUserIdInput {
+  listId: ListCreateOneWithoutPermissionsInput;
+  type: PermissionType;
+}
+
+export interface ItemCreateOneInput {
+  create?: ItemCreateInput;
+  connect?: ItemWhereUniqueInput;
+}
+
+export interface ListCreateOneWithoutPermissionsInput {
+  create?: ListCreateWithoutPermissionsInput;
+  connect?: ListWhereUniqueInput;
+}
+
+export type StockWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+}>;
+
+export interface ListCreateWithoutPermissionsInput {
+  title: String;
+  type: ListType;
+  owner: UserCreateOneWithoutListsInput;
+  parentList?: ListCreateOneInput;
+  items?: ItemCreateManyInput;
+}
+
+export interface PermissionCreateInput {
+  userId: UserCreateOneWithoutPermissionsInput;
+  listId: ListCreateOneWithoutPermissionsInput;
+  type: PermissionType;
+}
+
+export interface ItemUpdateDataInput {
+  title?: String;
+  description?: String;
+  owner?: UserUpdateOneRequiredWithoutItemsInput;
+}
+
+export interface ListUpdateInput {
+  title?: String;
+  type?: ListType;
+  owner?: UserUpdateOneRequiredWithoutListsInput;
+  permissions?: PermissionUpdateManyWithoutListIdInput;
+  parentList?: ListUpdateOneInput;
+  items?: ItemUpdateManyInput;
+}
+
+export interface ItemUpdateInput {
+  title?: String;
+  description?: String;
+  owner?: UserUpdateOneRequiredWithoutItemsInput;
+}
+
+export interface ListUpsertWithWhereUniqueWithoutOwnerInput {
+  where: ListWhereUniqueInput;
+  update: ListUpdateWithoutOwnerDataInput;
+  create: ListCreateWithoutOwnerInput;
+}
+
+export interface UserUpdateOneRequiredWithoutItemsInput {
+  create?: UserCreateWithoutItemsInput;
+  update?: UserUpdateWithoutItemsDataInput;
+  upsert?: UserUpsertWithoutItemsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export type UserWhereUniqueInput = AtLeastOne<{
+  id: ID_Input;
+  email?: String;
+}>;
+
+export interface UserUpdateWithoutItemsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  lists?: ListUpdateManyWithoutOwnerInput;
+  permissions?: PermissionUpdateManyWithoutUserIdInput;
+}
+
+export interface PermissionUpsertWithWhereUniqueWithoutUserIdInput {
+  where: PermissionWhereUniqueInput;
+  update: PermissionUpdateWithoutUserIdDataInput;
+  create: PermissionCreateWithoutUserIdInput;
+}
+
+export interface ListUpdateManyWithoutOwnerInput {
+  create?: ListCreateWithoutOwnerInput[] | ListCreateWithoutOwnerInput;
+  delete?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  connect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  disconnect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+  update?:
+    | ListUpdateWithWhereUniqueWithoutOwnerInput[]
+    | ListUpdateWithWhereUniqueWithoutOwnerInput;
+  upsert?:
+    | ListUpsertWithWhereUniqueWithoutOwnerInput[]
+    | ListUpsertWithWhereUniqueWithoutOwnerInput;
+}
+
+export interface ItemUpsertWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput;
+  update: ItemUpdateDataInput;
+  create: ItemCreateInput;
+}
+
+export interface ListUpdateWithWhereUniqueWithoutOwnerInput {
+  where: ListWhereUniqueInput;
+  data: ListUpdateWithoutOwnerDataInput;
+}
+
+export interface ItemCreateInput {
+  title: String;
+  description?: String;
+  owner: UserCreateOneWithoutItemsInput;
+}
+
+export interface ItemWhereInput {
   id?: ID_Input;
   id_not?: ID_Input;
   id_in?: ID_Input[] | ID_Input;
@@ -278,14 +766,6 @@ export interface TaskWhereInput {
   id_not_starts_with?: ID_Input;
   id_ends_with?: ID_Input;
   id_not_ends_with?: ID_Input;
-  createdAt?: DateTimeInput;
-  createdAt_not?: DateTimeInput;
-  createdAt_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
-  createdAt_lt?: DateTimeInput;
-  createdAt_lte?: DateTimeInput;
-  createdAt_gt?: DateTimeInput;
-  createdAt_gte?: DateTimeInput;
   title?: String;
   title_not?: String;
   title_in?: String[] | String;
@@ -300,13 +780,600 @@ export interface TaskWhereInput {
   title_not_starts_with?: String;
   title_ends_with?: String;
   title_not_ends_with?: String;
-  AND?: TaskWhereInput[] | TaskWhereInput;
-  OR?: TaskWhereInput[] | TaskWhereInput;
-  NOT?: TaskWhereInput[] | TaskWhereInput;
+  description?: String;
+  description_not?: String;
+  description_in?: String[] | String;
+  description_not_in?: String[] | String;
+  description_lt?: String;
+  description_lte?: String;
+  description_gt?: String;
+  description_gte?: String;
+  description_contains?: String;
+  description_not_contains?: String;
+  description_starts_with?: String;
+  description_not_starts_with?: String;
+  description_ends_with?: String;
+  description_not_ends_with?: String;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  owner?: UserWhereInput;
+  AND?: ItemWhereInput[] | ItemWhereInput;
+  OR?: ItemWhereInput[] | ItemWhereInput;
+  NOT?: ItemWhereInput[] | ItemWhereInput;
+}
+
+export interface UserCreateWithoutItemsInput {
+  name: String;
+  email: String;
+  password: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  lists?: ListCreateManyWithoutOwnerInput;
+  permissions?: PermissionCreateManyWithoutUserIdInput;
+}
+
+export interface ItemUpdateWithWhereUniqueNestedInput {
+  where: ItemWhereUniqueInput;
+  data: ItemUpdateDataInput;
+}
+
+export interface ListCreateWithoutOwnerInput {
+  title: String;
+  type: ListType;
+  permissions?: PermissionCreateManyWithoutListIdInput;
+  parentList?: ListCreateOneInput;
+  items?: ItemCreateManyInput;
+}
+
+export interface ListWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  title?: String;
+  title_not?: String;
+  title_in?: String[] | String;
+  title_not_in?: String[] | String;
+  title_lt?: String;
+  title_lte?: String;
+  title_gt?: String;
+  title_gte?: String;
+  title_contains?: String;
+  title_not_contains?: String;
+  title_starts_with?: String;
+  title_not_starts_with?: String;
+  title_ends_with?: String;
+  title_not_ends_with?: String;
+  type?: ListType;
+  type_not?: ListType;
+  type_in?: ListType[] | ListType;
+  type_not_in?: ListType[] | ListType;
+  createdAt?: DateTimeInput;
+  createdAt_not?: DateTimeInput;
+  createdAt_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_not_in?: DateTimeInput[] | DateTimeInput;
+  createdAt_lt?: DateTimeInput;
+  createdAt_lte?: DateTimeInput;
+  createdAt_gt?: DateTimeInput;
+  createdAt_gte?: DateTimeInput;
+  updatedAt?: DateTimeInput;
+  updatedAt_not?: DateTimeInput;
+  updatedAt_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_not_in?: DateTimeInput[] | DateTimeInput;
+  updatedAt_lt?: DateTimeInput;
+  updatedAt_lte?: DateTimeInput;
+  updatedAt_gt?: DateTimeInput;
+  updatedAt_gte?: DateTimeInput;
+  owner?: UserWhereInput;
+  permissions_every?: PermissionWhereInput;
+  permissions_some?: PermissionWhereInput;
+  permissions_none?: PermissionWhereInput;
+  parentList?: ListWhereInput;
+  items_every?: ItemWhereInput;
+  items_some?: ItemWhereInput;
+  items_none?: ItemWhereInput;
+  AND?: ListWhereInput[] | ListWhereInput;
+  OR?: ListWhereInput[] | ListWhereInput;
+  NOT?: ListWhereInput[] | ListWhereInput;
+}
+
+export interface PermissionCreateWithoutListIdInput {
+  userId: UserCreateOneWithoutPermissionsInput;
+  type: PermissionType;
+}
+
+export interface PermissionUpdateWithoutListIdDataInput {
+  userId?: UserUpdateOneRequiredWithoutPermissionsInput;
+  type?: PermissionType;
+}
+
+export interface UserSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: UserWhereInput;
+  AND?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  OR?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+  NOT?: UserSubscriptionWhereInput[] | UserSubscriptionWhereInput;
+}
+
+export interface UserUpdateOneRequiredWithoutPermissionsInput {
+  create?: UserCreateWithoutPermissionsInput;
+  update?: UserUpdateWithoutPermissionsDataInput;
+  upsert?: UserUpsertWithoutPermissionsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface ItemSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: ItemWhereInput;
+  AND?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput;
+  OR?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput;
+  NOT?: ItemSubscriptionWhereInput[] | ItemSubscriptionWhereInput;
+}
+
+export interface UserUpdateWithoutPermissionsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  lists?: ListUpdateManyWithoutOwnerInput;
+  items?: ItemUpdateManyWithoutOwnerInput;
+}
+
+export interface ItemUpsertNestedInput {
+  update: ItemUpdateDataInput;
+  create: ItemCreateInput;
+}
+
+export interface ItemUpdateManyWithoutOwnerInput {
+  create?: ItemCreateWithoutOwnerInput[] | ItemCreateWithoutOwnerInput;
+  delete?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+  connect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+  disconnect?: ItemWhereUniqueInput[] | ItemWhereUniqueInput;
+  update?:
+    | ItemUpdateWithWhereUniqueWithoutOwnerInput[]
+    | ItemUpdateWithWhereUniqueWithoutOwnerInput;
+  upsert?:
+    | ItemUpsertWithWhereUniqueWithoutOwnerInput[]
+    | ItemUpsertWithWhereUniqueWithoutOwnerInput;
+}
+
+export interface StockUpdateInput {
+  listId?: ListUpdateOneRequiredInput;
+  itemId?: ItemUpdateOneRequiredInput;
+  quantity?: Int;
+  unit?: Unit;
+}
+
+export interface ItemUpdateWithWhereUniqueWithoutOwnerInput {
+  where: ItemWhereUniqueInput;
+  data: ItemUpdateWithoutOwnerDataInput;
+}
+
+export interface PermissionUpdateInput {
+  userId?: UserUpdateOneRequiredWithoutPermissionsInput;
+  listId?: ListUpdateOneRequiredWithoutPermissionsInput;
+  type?: PermissionType;
+}
+
+export interface ItemUpdateWithoutOwnerDataInput {
+  title?: String;
+  description?: String;
+}
+
+export interface UserUpsertWithoutItemsInput {
+  update: UserUpdateWithoutItemsDataInput;
+  create: UserCreateWithoutItemsInput;
+}
+
+export interface ItemUpsertWithWhereUniqueWithoutOwnerInput {
+  where: ItemWhereUniqueInput;
+  update: ItemUpdateWithoutOwnerDataInput;
+  create: ItemCreateWithoutOwnerInput;
+}
+
+export interface UserUpsertWithoutListsInput {
+  update: UserUpdateWithoutListsDataInput;
+  create: UserCreateWithoutListsInput;
+}
+
+export interface UserUpsertWithoutPermissionsInput {
+  update: UserUpdateWithoutPermissionsDataInput;
+  create: UserCreateWithoutPermissionsInput;
+}
+
+export interface ListCreateManyWithoutOwnerInput {
+  create?: ListCreateWithoutOwnerInput[] | ListCreateWithoutOwnerInput;
+  connect?: ListWhereUniqueInput[] | ListWhereUniqueInput;
+}
+
+export interface PermissionUpsertWithWhereUniqueWithoutListIdInput {
+  where: PermissionWhereUniqueInput;
+  update: PermissionUpdateWithoutListIdDataInput;
+  create: PermissionCreateWithoutListIdInput;
+}
+
+export interface UserCreateOneWithoutPermissionsInput {
+  create?: UserCreateWithoutPermissionsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface ListUpdateOneInput {
+  create?: ListCreateInput;
+  update?: ListUpdateDataInput;
+  upsert?: ListUpsertNestedInput;
+  delete?: Boolean;
+  disconnect?: Boolean;
+  connect?: ListWhereUniqueInput;
+}
+
+export interface UserCreateInput {
+  name: String;
+  email: String;
+  password: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  lists?: ListCreateManyWithoutOwnerInput;
+  items?: ItemCreateManyWithoutOwnerInput;
+  permissions?: PermissionCreateManyWithoutUserIdInput;
+}
+
+export interface ListUpdateDataInput {
+  title?: String;
+  type?: ListType;
+  owner?: UserUpdateOneRequiredWithoutListsInput;
+  permissions?: PermissionUpdateManyWithoutListIdInput;
+  parentList?: ListUpdateOneInput;
+  items?: ItemUpdateManyInput;
+}
+
+export interface StockCreateInput {
+  listId: ListCreateOneInput;
+  itemId: ItemCreateOneInput;
+  quantity?: Int;
+  unit?: Unit;
+}
+
+export interface UserUpdateOneRequiredWithoutListsInput {
+  create?: UserCreateWithoutListsInput;
+  update?: UserUpdateWithoutListsDataInput;
+  upsert?: UserUpsertWithoutListsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface ListUpsertNestedInput {
+  update: ListUpdateDataInput;
+  create: ListCreateInput;
+}
+
+export interface UserUpdateWithoutListsDataInput {
+  name?: String;
+  email?: String;
+  password?: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  items?: ItemUpdateManyWithoutOwnerInput;
+  permissions?: PermissionUpdateManyWithoutUserIdInput;
+}
+
+export interface UserCreateOneWithoutItemsInput {
+  create?: UserCreateWithoutItemsInput;
+  connect?: UserWhereUniqueInput;
+}
+
+export interface PermissionUpdateManyWithoutUserIdInput {
+  create?:
+    | PermissionCreateWithoutUserIdInput[]
+    | PermissionCreateWithoutUserIdInput;
+  delete?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+  connect?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+  disconnect?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+  update?:
+    | PermissionUpdateWithWhereUniqueWithoutUserIdInput[]
+    | PermissionUpdateWithWhereUniqueWithoutUserIdInput;
+  upsert?:
+    | PermissionUpsertWithWhereUniqueWithoutUserIdInput[]
+    | PermissionUpsertWithWhereUniqueWithoutUserIdInput;
+}
+
+export interface PermissionSubscriptionWhereInput {
+  mutation_in?: MutationType[] | MutationType;
+  updatedFields_contains?: String;
+  updatedFields_contains_every?: String[] | String;
+  updatedFields_contains_some?: String[] | String;
+  node?: PermissionWhereInput;
+  AND?: PermissionSubscriptionWhereInput[] | PermissionSubscriptionWhereInput;
+  OR?: PermissionSubscriptionWhereInput[] | PermissionSubscriptionWhereInput;
+  NOT?: PermissionSubscriptionWhereInput[] | PermissionSubscriptionWhereInput;
+}
+
+export interface ListUpdateWithoutPermissionsDataInput {
+  title?: String;
+  type?: ListType;
+  owner?: UserUpdateOneRequiredWithoutListsInput;
+  parentList?: ListUpdateOneInput;
+  items?: ItemUpdateManyInput;
+}
+
+export interface ListUpdateOneRequiredWithoutPermissionsInput {
+  create?: ListCreateWithoutPermissionsInput;
+  update?: ListUpdateWithoutPermissionsDataInput;
+  upsert?: ListUpsertWithoutPermissionsInput;
+  connect?: ListWhereUniqueInput;
+}
+
+export interface PermissionUpdateWithoutUserIdDataInput {
+  listId?: ListUpdateOneRequiredWithoutPermissionsInput;
+  type?: PermissionType;
+}
+
+export interface PermissionUpdateWithWhereUniqueWithoutUserIdInput {
+  where: PermissionWhereUniqueInput;
+  data: PermissionUpdateWithoutUserIdDataInput;
+}
+
+export interface ListUpdateOneRequiredInput {
+  create?: ListCreateInput;
+  update?: ListUpdateDataInput;
+  upsert?: ListUpsertNestedInput;
+  connect?: ListWhereUniqueInput;
+}
+
+export interface PermissionCreateManyWithoutListIdInput {
+  create?:
+    | PermissionCreateWithoutListIdInput[]
+    | PermissionCreateWithoutListIdInput;
+  connect?: PermissionWhereUniqueInput[] | PermissionWhereUniqueInput;
+}
+
+export interface ListUpsertWithoutPermissionsInput {
+  update: ListUpdateWithoutPermissionsDataInput;
+  create: ListCreateWithoutPermissionsInput;
+}
+
+export interface StockWhereInput {
+  id?: ID_Input;
+  id_not?: ID_Input;
+  id_in?: ID_Input[] | ID_Input;
+  id_not_in?: ID_Input[] | ID_Input;
+  id_lt?: ID_Input;
+  id_lte?: ID_Input;
+  id_gt?: ID_Input;
+  id_gte?: ID_Input;
+  id_contains?: ID_Input;
+  id_not_contains?: ID_Input;
+  id_starts_with?: ID_Input;
+  id_not_starts_with?: ID_Input;
+  id_ends_with?: ID_Input;
+  id_not_ends_with?: ID_Input;
+  listId?: ListWhereInput;
+  itemId?: ItemWhereInput;
+  quantity?: Int;
+  quantity_not?: Int;
+  quantity_in?: Int[] | Int;
+  quantity_not_in?: Int[] | Int;
+  quantity_lt?: Int;
+  quantity_lte?: Int;
+  quantity_gt?: Int;
+  quantity_gte?: Int;
+  unit?: Unit;
+  unit_not?: Unit;
+  unit_in?: Unit[] | Unit;
+  unit_not_in?: Unit[] | Unit;
+  AND?: StockWhereInput[] | StockWhereInput;
+  OR?: StockWhereInput[] | StockWhereInput;
+  NOT?: StockWhereInput[] | StockWhereInput;
 }
 
 export interface NodeNode {
   id: ID_Output;
+}
+
+export interface UserPreviousValuesNode {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface UserPreviousValues
+  extends Promise<UserPreviousValuesNode>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  resetToken: () => Promise<String>;
+  resetTokenExpiry: () => Promise<Float>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserPreviousValuesSubscription
+  extends Promise<AsyncIterator<UserPreviousValuesNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  resetToken: () => Promise<AsyncIterator<String>>;
+  resetTokenExpiry: () => Promise<AsyncIterator<Float>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ListConnectionNode {}
+
+export interface ListConnection
+  extends Promise<ListConnectionNode>,
+    Fragmentable {
+  pageInfo: <T = PageInfo>() => T;
+  edges: <T = FragmentableArray<ListEdgeNode>>() => T;
+  aggregate: <T = AggregateList>() => T;
+}
+
+export interface ListConnectionSubscription
+  extends Promise<AsyncIterator<ListConnectionNode>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ListEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateListSubscription>() => T;
+}
+
+export interface ListNode {
+  id: ID_Output;
+  title: String;
+  type: ListType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface List extends Promise<ListNode>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  type: () => Promise<ListType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  owner: <T = User>() => T;
+  permissions: <T = FragmentableArray<PermissionNode>>(
+    args?: {
+      where?: PermissionWhereInput;
+      orderBy?: PermissionOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  parentList: <T = List>() => T;
+  items: <T = FragmentableArray<ItemNode>>(
+    args?: {
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface ListSubscription
+  extends Promise<AsyncIterator<ListNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<ListType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  owner: <T = UserSubscription>() => T;
+  permissions: <T = Promise<AsyncIterator<PermissionSubscription>>>(
+    args?: {
+      where?: PermissionWhereInput;
+      orderBy?: PermissionOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  parentList: <T = ListSubscription>() => T;
+  items: <T = Promise<AsyncIterator<ItemSubscription>>>(
+    args?: {
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+}
+
+export interface AggregateItemNode {
+  count: Int;
+}
+
+export interface AggregateItem
+  extends Promise<AggregateItemNode>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateItemSubscription
+  extends Promise<AsyncIterator<AggregateItemNode>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface AggregateUserNode {
+  count: Int;
+}
+
+export interface AggregateUser
+  extends Promise<AggregateUserNode>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregateUserSubscription
+  extends Promise<AsyncIterator<AggregateUserNode>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
+export interface ItemEdgeNode {
+  cursor: String;
+}
+
+export interface ItemEdge extends Promise<ItemEdgeNode>, Fragmentable {
+  node: <T = Item>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface ItemEdgeSubscription
+  extends Promise<AsyncIterator<ItemEdgeNode>>,
+    Fragmentable {
+  node: <T = ItemSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
 }
 
 export interface UserConnectionNode {}
@@ -327,143 +1394,45 @@ export interface UserConnectionSubscription
   aggregate: <T = AggregateUserSubscription>() => T;
 }
 
-export interface UserPreviousValuesNode {
+export interface StockPreviousValuesNode {
   id: ID_Output;
-  name: String;
-  email: String;
+  quantity?: Int;
+  unit?: Unit;
 }
 
-export interface UserPreviousValues
-  extends Promise<UserPreviousValuesNode>,
+export interface StockPreviousValues
+  extends Promise<StockPreviousValuesNode>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
+  quantity: () => Promise<Int>;
+  unit: () => Promise<Unit>;
 }
 
-export interface UserPreviousValuesSubscription
-  extends Promise<AsyncIterator<UserPreviousValuesNode>>,
+export interface StockPreviousValuesSubscription
+  extends Promise<AsyncIterator<StockPreviousValuesNode>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
+  quantity: () => Promise<AsyncIterator<Int>>;
+  unit: () => Promise<AsyncIterator<Unit>>;
 }
 
-export interface UserNode {
+export interface PermissionPreviousValuesNode {
   id: ID_Output;
-  name: String;
-  email: String;
+  type: PermissionType;
 }
 
-export interface User extends Promise<UserNode>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  name: () => Promise<String>;
-  email: () => Promise<String>;
-}
-
-export interface UserSubscription
-  extends Promise<AsyncIterator<UserNode>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  name: () => Promise<AsyncIterator<String>>;
-  email: () => Promise<AsyncIterator<String>>;
-}
-
-export interface BatchPayloadNode {
-  count: Long;
-}
-
-export interface BatchPayload extends Promise<BatchPayloadNode>, Fragmentable {
-  count: () => Promise<Long>;
-}
-
-export interface BatchPayloadSubscription
-  extends Promise<AsyncIterator<BatchPayloadNode>>,
-    Fragmentable {
-  count: () => Promise<AsyncIterator<Long>>;
-}
-
-export interface TaskSubscriptionPayloadNode {
-  mutation: MutationType;
-  updatedFields?: String[];
-}
-
-export interface TaskSubscriptionPayload
-  extends Promise<TaskSubscriptionPayloadNode>,
-    Fragmentable {
-  mutation: () => Promise<MutationType>;
-  node: <T = Task>() => T;
-  updatedFields: () => Promise<String[]>;
-  previousValues: <T = TaskPreviousValues>() => T;
-}
-
-export interface TaskSubscriptionPayloadSubscription
-  extends Promise<AsyncIterator<TaskSubscriptionPayloadNode>>,
-    Fragmentable {
-  mutation: () => Promise<AsyncIterator<MutationType>>;
-  node: <T = TaskSubscription>() => T;
-  updatedFields: () => Promise<AsyncIterator<String[]>>;
-  previousValues: <T = TaskPreviousValuesSubscription>() => T;
-}
-
-export interface TaskConnectionNode {}
-
-export interface TaskConnection
-  extends Promise<TaskConnectionNode>,
-    Fragmentable {
-  pageInfo: <T = PageInfo>() => T;
-  edges: <T = FragmentableArray<TaskEdgeNode>>() => T;
-  aggregate: <T = AggregateTask>() => T;
-}
-
-export interface TaskConnectionSubscription
-  extends Promise<AsyncIterator<TaskConnectionNode>>,
-    Fragmentable {
-  pageInfo: <T = PageInfoSubscription>() => T;
-  edges: <T = Promise<AsyncIterator<TaskEdgeSubscription>>>() => T;
-  aggregate: <T = AggregateTaskSubscription>() => T;
-}
-
-export interface TaskPreviousValuesNode {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  title: String;
-}
-
-export interface TaskPreviousValues
-  extends Promise<TaskPreviousValuesNode>,
+export interface PermissionPreviousValues
+  extends Promise<PermissionPreviousValuesNode>,
     Fragmentable {
   id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
+  type: () => Promise<PermissionType>;
 }
 
-export interface TaskPreviousValuesSubscription
-  extends Promise<AsyncIterator<TaskPreviousValuesNode>>,
+export interface PermissionPreviousValuesSubscription
+  extends Promise<AsyncIterator<PermissionPreviousValuesNode>>,
     Fragmentable {
   id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
-}
-
-export interface TaskNode {
-  id: ID_Output;
-  createdAt: DateTimeOutput;
-  title: String;
-}
-
-export interface Task extends Promise<TaskNode>, Fragmentable {
-  id: () => Promise<ID_Output>;
-  createdAt: () => Promise<DateTimeOutput>;
-  title: () => Promise<String>;
-}
-
-export interface TaskSubscription
-  extends Promise<AsyncIterator<TaskNode>>,
-    Fragmentable {
-  id: () => Promise<AsyncIterator<ID_Output>>;
-  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
-  title: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<PermissionType>>;
 }
 
 export interface UserEdgeNode {
@@ -482,34 +1451,229 @@ export interface UserEdgeSubscription
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export interface AggregateTaskNode {
+export interface AggregateStockNode {
   count: Int;
 }
 
-export interface AggregateTask
-  extends Promise<AggregateTaskNode>,
+export interface AggregateStock
+  extends Promise<AggregateStockNode>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateTaskSubscription
-  extends Promise<AsyncIterator<AggregateTaskNode>>,
+export interface AggregateStockSubscription
+  extends Promise<AsyncIterator<AggregateStockNode>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
 
-export interface AggregateUserNode {
+export interface StockSubscriptionPayloadNode {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface StockSubscriptionPayload
+  extends Promise<StockSubscriptionPayloadNode>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = Stock>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = StockPreviousValues>() => T;
+}
+
+export interface StockSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<StockSubscriptionPayloadNode>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = StockSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = StockPreviousValuesSubscription>() => T;
+}
+
+export interface BatchPayloadNode {
+  count: Long;
+}
+
+export interface BatchPayload extends Promise<BatchPayloadNode>, Fragmentable {
+  count: () => Promise<Long>;
+}
+
+export interface BatchPayloadSubscription
+  extends Promise<AsyncIterator<BatchPayloadNode>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Long>>;
+}
+
+export interface StockEdgeNode {
+  cursor: String;
+}
+
+export interface StockEdge extends Promise<StockEdgeNode>, Fragmentable {
+  node: <T = Stock>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface StockEdgeSubscription
+  extends Promise<AsyncIterator<StockEdgeNode>>,
+    Fragmentable {
+  node: <T = StockSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface PermissionNode {
+  id: ID_Output;
+  type: PermissionType;
+}
+
+export interface Permission extends Promise<PermissionNode>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  userId: <T = User>() => T;
+  listId: <T = List>() => T;
+  type: () => Promise<PermissionType>;
+}
+
+export interface PermissionSubscription
+  extends Promise<AsyncIterator<PermissionNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  userId: <T = UserSubscription>() => T;
+  listId: <T = ListSubscription>() => T;
+  type: () => Promise<AsyncIterator<PermissionType>>;
+}
+
+export interface ItemNode {
+  id: ID_Output;
+  title: String;
+  description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface Item extends Promise<ItemNode>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+  owner: <T = User>() => T;
+}
+
+export interface ItemSubscription
+  extends Promise<AsyncIterator<ItemNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  owner: <T = UserSubscription>() => T;
+}
+
+export interface StockNode {
+  id: ID_Output;
+  quantity?: Int;
+  unit?: Unit;
+}
+
+export interface Stock extends Promise<StockNode>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  listId: <T = List>() => T;
+  itemId: <T = Item>() => T;
+  quantity: () => Promise<Int>;
+  unit: () => Promise<Unit>;
+}
+
+export interface StockSubscription
+  extends Promise<AsyncIterator<StockNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  listId: <T = ListSubscription>() => T;
+  itemId: <T = ItemSubscription>() => T;
+  quantity: () => Promise<AsyncIterator<Int>>;
+  unit: () => Promise<AsyncIterator<Unit>>;
+}
+
+export interface ItemSubscriptionPayloadNode {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface ItemSubscriptionPayload
+  extends Promise<ItemSubscriptionPayloadNode>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = Item>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ItemPreviousValues>() => T;
+}
+
+export interface ItemSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ItemSubscriptionPayloadNode>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ItemSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ItemPreviousValuesSubscription>() => T;
+}
+
+export interface PermissionEdgeNode {
+  cursor: String;
+}
+
+export interface PermissionEdge
+  extends Promise<PermissionEdgeNode>,
+    Fragmentable {
+  node: <T = Permission>() => T;
+  cursor: () => Promise<String>;
+}
+
+export interface PermissionEdgeSubscription
+  extends Promise<AsyncIterator<PermissionEdgeNode>>,
+    Fragmentable {
+  node: <T = PermissionSubscription>() => T;
+  cursor: () => Promise<AsyncIterator<String>>;
+}
+
+export interface ItemPreviousValuesNode {
+  id: ID_Output;
+  title: String;
+  description?: String;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ItemPreviousValues
+  extends Promise<ItemPreviousValuesNode>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  description: () => Promise<String>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ItemPreviousValuesSubscription
+  extends Promise<AsyncIterator<ItemPreviousValuesNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  description: () => Promise<AsyncIterator<String>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface AggregateListNode {
   count: Int;
 }
 
-export interface AggregateUser
-  extends Promise<AggregateUserNode>,
+export interface AggregateList
+  extends Promise<AggregateListNode>,
     Fragmentable {
   count: () => Promise<Int>;
 }
 
-export interface AggregateUserSubscription
-  extends Promise<AsyncIterator<AggregateUserNode>>,
+export interface AggregateListSubscription
+  extends Promise<AsyncIterator<AggregateListNode>>,
     Fragmentable {
   count: () => Promise<AsyncIterator<Int>>;
 }
@@ -537,6 +1701,233 @@ export interface PageInfoSubscription
   endCursor: () => Promise<AsyncIterator<String>>;
 }
 
+export interface StockConnectionNode {}
+
+export interface StockConnection
+  extends Promise<StockConnectionNode>,
+    Fragmentable {
+  pageInfo: <T = PageInfo>() => T;
+  edges: <T = FragmentableArray<StockEdgeNode>>() => T;
+  aggregate: <T = AggregateStock>() => T;
+}
+
+export interface StockConnectionSubscription
+  extends Promise<AsyncIterator<StockConnectionNode>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<StockEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateStockSubscription>() => T;
+}
+
+export interface UserNode {
+  id: ID_Output;
+  name: String;
+  email: String;
+  password: String;
+  resetToken?: String;
+  resetTokenExpiry?: Float;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface User extends Promise<UserNode>, Fragmentable {
+  id: () => Promise<ID_Output>;
+  name: () => Promise<String>;
+  email: () => Promise<String>;
+  password: () => Promise<String>;
+  resetToken: () => Promise<String>;
+  resetTokenExpiry: () => Promise<Float>;
+  lists: <T = FragmentableArray<ListNode>>(
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  items: <T = FragmentableArray<ItemNode>>(
+    args?: {
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  permissions: <T = FragmentableArray<PermissionNode>>(
+    args?: {
+      where?: PermissionWhereInput;
+      orderBy?: PermissionOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface UserSubscription
+  extends Promise<AsyncIterator<UserNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  name: () => Promise<AsyncIterator<String>>;
+  email: () => Promise<AsyncIterator<String>>;
+  password: () => Promise<AsyncIterator<String>>;
+  resetToken: () => Promise<AsyncIterator<String>>;
+  resetTokenExpiry: () => Promise<AsyncIterator<Float>>;
+  lists: <T = Promise<AsyncIterator<ListSubscription>>>(
+    args?: {
+      where?: ListWhereInput;
+      orderBy?: ListOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  items: <T = Promise<AsyncIterator<ItemSubscription>>>(
+    args?: {
+      where?: ItemWhereInput;
+      orderBy?: ItemOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  permissions: <T = Promise<AsyncIterator<PermissionSubscription>>>(
+    args?: {
+      where?: PermissionWhereInput;
+      orderBy?: PermissionOrderByInput;
+      skip?: Int;
+      after?: String;
+      before?: String;
+      first?: Int;
+      last?: Int;
+    }
+  ) => T;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface PermissionSubscriptionPayloadNode {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface PermissionSubscriptionPayload
+  extends Promise<PermissionSubscriptionPayloadNode>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = Permission>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = PermissionPreviousValues>() => T;
+}
+
+export interface PermissionSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<PermissionSubscriptionPayloadNode>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = PermissionSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = PermissionPreviousValuesSubscription>() => T;
+}
+
+export interface ItemConnectionNode {}
+
+export interface ItemConnection
+  extends Promise<ItemConnectionNode>,
+    Fragmentable {
+  pageInfo: <T = PageInfo>() => T;
+  edges: <T = FragmentableArray<ItemEdgeNode>>() => T;
+  aggregate: <T = AggregateItem>() => T;
+}
+
+export interface ItemConnectionSubscription
+  extends Promise<AsyncIterator<ItemConnectionNode>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<ItemEdgeSubscription>>>() => T;
+  aggregate: <T = AggregateItemSubscription>() => T;
+}
+
+export interface ListPreviousValuesNode {
+  id: ID_Output;
+  title: String;
+  type: ListType;
+  createdAt: DateTimeOutput;
+  updatedAt: DateTimeOutput;
+}
+
+export interface ListPreviousValues
+  extends Promise<ListPreviousValuesNode>,
+    Fragmentable {
+  id: () => Promise<ID_Output>;
+  title: () => Promise<String>;
+  type: () => Promise<ListType>;
+  createdAt: () => Promise<DateTimeOutput>;
+  updatedAt: () => Promise<DateTimeOutput>;
+}
+
+export interface ListPreviousValuesSubscription
+  extends Promise<AsyncIterator<ListPreviousValuesNode>>,
+    Fragmentable {
+  id: () => Promise<AsyncIterator<ID_Output>>;
+  title: () => Promise<AsyncIterator<String>>;
+  type: () => Promise<AsyncIterator<ListType>>;
+  createdAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+  updatedAt: () => Promise<AsyncIterator<DateTimeOutput>>;
+}
+
+export interface ListSubscriptionPayloadNode {
+  mutation: MutationType;
+  updatedFields?: String[];
+}
+
+export interface ListSubscriptionPayload
+  extends Promise<ListSubscriptionPayloadNode>,
+    Fragmentable {
+  mutation: () => Promise<MutationType>;
+  node: <T = List>() => T;
+  updatedFields: () => Promise<String[]>;
+  previousValues: <T = ListPreviousValues>() => T;
+}
+
+export interface ListSubscriptionPayloadSubscription
+  extends Promise<AsyncIterator<ListSubscriptionPayloadNode>>,
+    Fragmentable {
+  mutation: () => Promise<AsyncIterator<MutationType>>;
+  node: <T = ListSubscription>() => T;
+  updatedFields: () => Promise<AsyncIterator<String[]>>;
+  previousValues: <T = ListPreviousValuesSubscription>() => T;
+}
+
+export interface AggregatePermissionNode {
+  count: Int;
+}
+
+export interface AggregatePermission
+  extends Promise<AggregatePermissionNode>,
+    Fragmentable {
+  count: () => Promise<Int>;
+}
+
+export interface AggregatePermissionSubscription
+  extends Promise<AsyncIterator<AggregatePermissionNode>>,
+    Fragmentable {
+  count: () => Promise<AsyncIterator<Int>>;
+}
+
 export interface UserSubscriptionPayloadNode {
   mutation: MutationType;
   updatedFields?: String[];
@@ -560,29 +1951,39 @@ export interface UserSubscriptionPayloadSubscription
   previousValues: <T = UserPreviousValuesSubscription>() => T;
 }
 
-export interface TaskEdgeNode {
+export interface ListEdgeNode {
   cursor: String;
 }
 
-export interface TaskEdge extends Promise<TaskEdgeNode>, Fragmentable {
-  node: <T = Task>() => T;
+export interface ListEdge extends Promise<ListEdgeNode>, Fragmentable {
+  node: <T = List>() => T;
   cursor: () => Promise<String>;
 }
 
-export interface TaskEdgeSubscription
-  extends Promise<AsyncIterator<TaskEdgeNode>>,
+export interface ListEdgeSubscription
+  extends Promise<AsyncIterator<ListEdgeNode>>,
     Fragmentable {
-  node: <T = TaskSubscription>() => T;
+  node: <T = ListSubscription>() => T;
   cursor: () => Promise<AsyncIterator<String>>;
 }
 
-export type Long = string;
+export interface PermissionConnectionNode {}
 
-/*
-The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
-*/
-export type ID_Input = string | number;
-export type ID_Output = string;
+export interface PermissionConnection
+  extends Promise<PermissionConnectionNode>,
+    Fragmentable {
+  pageInfo: <T = PageInfo>() => T;
+  edges: <T = FragmentableArray<PermissionEdgeNode>>() => T;
+  aggregate: <T = AggregatePermission>() => T;
+}
+
+export interface PermissionConnectionSubscription
+  extends Promise<AsyncIterator<PermissionConnectionNode>>,
+    Fragmentable {
+  pageInfo: <T = PageInfoSubscription>() => T;
+  edges: <T = Promise<AsyncIterator<PermissionEdgeSubscription>>>() => T;
+  aggregate: <T = AggregatePermissionSubscription>() => T;
+}
 
 /*
 The `Boolean` scalar type represents `true` or `false`.
@@ -594,10 +1995,7 @@ The `Int` scalar type represents non-fractional signed whole numeric values. Int
 */
 export type Int = number;
 
-/*
-The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
-*/
-export type String = string;
+export type Long = string;
 
 /*
 DateTime scalar input type, allowing Date
@@ -608,6 +2006,22 @@ export type DateTimeInput = Date | string;
 DateTime scalar output type, which is always a string
 */
 export type DateTimeOutput = string;
+
+/*
+The `ID` scalar type represents a unique identifier, often used to refetch an object or as key for a cache. The ID type appears in a JSON response as a String; however, it is not intended to be human-readable. When expected as an input type, any string (such as `"4"`) or integer (such as `4`) input value will be accepted as an ID.
+*/
+export type ID_Input = string | number;
+export type ID_Output = string;
+
+/*
+The `String` scalar type represents textual data, represented as UTF-8 character sequences. The String type is most often used by GraphQL to represent free-form human-readable text.
+*/
+export type String = string;
+
+/*
+The `Float` scalar type represents signed double-precision fractional values as specified by [IEEE 754](http://en.wikipedia.org/wiki/IEEE_floating_point). 
+*/
+export type Float = number;
 
 /**
  * Type Defs
