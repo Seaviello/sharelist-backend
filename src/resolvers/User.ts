@@ -1,14 +1,8 @@
-import { UserResolvers } from '../generated/resolvers';
-import { TypeMap } from './types/TypeMap';
+// This resolver file was scaffolded by github.com/prisma/graphqlgen, DO NOT EDIT.
+// Please do not import this file directly but copy & paste to your application code.
 
-export interface UserParent {
-    id: string;
-    name: string;
-    email: string;
-}
+import { UserResolvers } from '../generated/graphqlgen';
 
-export const User: UserResolvers.Type<TypeMap> = {
-    id: parent => parent.id,
-    name: parent => parent.name,
-    email: parent => parent.email,
+export const User: UserResolvers.Type = {
+    ...UserResolvers.defaultResolvers,
 };

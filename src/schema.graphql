@@ -1,9 +1,25 @@
-# import * from './generated/prisma.graphql'
+scalar DateTime
 
-type Mutation {
-    createTask(data: TaskCreateInput!): Task!
+type User {
+    id: ID!
+    name: String!
+    email: String!
+    password: String!
+    resetToken: String
+    resetTokenExpiry: Float
+    createdAt: DateTime!
+    updatedAt: DateTime!
 }
 
 type Query {
-    tasks: [Task!]!
+    currentUser: User
+}
+
+type Mutation {
+    #####   User operations   #####
+    signup(email: String!,
+        password: String!,
+        name: String!): User!
+    signin(email: String!,
+        password: String!): User
 }

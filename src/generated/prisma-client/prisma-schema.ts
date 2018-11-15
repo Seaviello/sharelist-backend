@@ -130,6 +130,11 @@ input ItemUpdateManyInput {
   disconnect: [ItemWhereUniqueInput!]
 }
 
+input ItemUpdateManyMutationInput {
+  title: String
+  description: String
+}
+
 input ItemUpdateManyWithoutOwnerInput {
   create: [ItemCreateWithoutOwnerInput!]
   delete: [ItemWhereUniqueInput!]
@@ -372,6 +377,11 @@ input ListUpdateInput {
   items: ItemUpdateManyInput
 }
 
+input ListUpdateManyMutationInput {
+  title: String
+  type: ListType
+}
+
 input ListUpdateManyWithoutOwnerInput {
   create: [ListCreateWithoutOwnerInput!]
   delete: [ListWhereUniqueInput!]
@@ -512,31 +522,31 @@ scalar Long
 type Mutation {
   createItem(data: ItemCreateInput!): Item!
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
-  updateManyItems(data: ItemUpdateInput!, where: ItemWhereInput): BatchPayload!
+  updateManyItems(data: ItemUpdateManyMutationInput!, where: ItemWhereInput): BatchPayload!
   upsertItem(where: ItemWhereUniqueInput!, create: ItemCreateInput!, update: ItemUpdateInput!): Item!
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteManyItems(where: ItemWhereInput): BatchPayload!
   createList(data: ListCreateInput!): List!
   updateList(data: ListUpdateInput!, where: ListWhereUniqueInput!): List
-  updateManyLists(data: ListUpdateInput!, where: ListWhereInput): BatchPayload!
+  updateManyLists(data: ListUpdateManyMutationInput!, where: ListWhereInput): BatchPayload!
   upsertList(where: ListWhereUniqueInput!, create: ListCreateInput!, update: ListUpdateInput!): List!
   deleteList(where: ListWhereUniqueInput!): List
   deleteManyLists(where: ListWhereInput): BatchPayload!
   createPermission(data: PermissionCreateInput!): Permission!
   updatePermission(data: PermissionUpdateInput!, where: PermissionWhereUniqueInput!): Permission
-  updateManyPermissions(data: PermissionUpdateInput!, where: PermissionWhereInput): BatchPayload!
+  updateManyPermissions(data: PermissionUpdateManyMutationInput!, where: PermissionWhereInput): BatchPayload!
   upsertPermission(where: PermissionWhereUniqueInput!, create: PermissionCreateInput!, update: PermissionUpdateInput!): Permission!
   deletePermission(where: PermissionWhereUniqueInput!): Permission
   deleteManyPermissions(where: PermissionWhereInput): BatchPayload!
   createStock(data: StockCreateInput!): Stock!
   updateStock(data: StockUpdateInput!, where: StockWhereUniqueInput!): Stock
-  updateManyStocks(data: StockUpdateInput!, where: StockWhereInput): BatchPayload!
+  updateManyStocks(data: StockUpdateManyMutationInput!, where: StockWhereInput): BatchPayload!
   upsertStock(where: StockWhereUniqueInput!, create: StockCreateInput!, update: StockUpdateInput!): Stock!
   deleteStock(where: StockWhereUniqueInput!): Stock
   deleteManyStocks(where: StockWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   deleteUser(where: UserWhereUniqueInput!): User
   deleteManyUsers(where: UserWhereInput): BatchPayload!
@@ -649,6 +659,10 @@ input PermissionUpdateInput {
   type: PermissionType
 }
 
+input PermissionUpdateManyMutationInput {
+  type: PermissionType
+}
+
 input PermissionUpdateManyWithoutListIdInput {
   create: [PermissionCreateWithoutListIdInput!]
   delete: [PermissionWhereUniqueInput!]
@@ -753,6 +767,7 @@ type Stock {
   listId: List!
   itemId: Item!
   quantity: Int
+  status: StockStatus
   unit: Unit
 }
 
@@ -766,6 +781,7 @@ input StockCreateInput {
   listId: ListCreateOneInput!
   itemId: ItemCreateOneInput!
   quantity: Int
+  status: StockStatus
   unit: Unit
 }
 
@@ -779,6 +795,8 @@ enum StockOrderByInput {
   id_DESC
   quantity_ASC
   quantity_DESC
+  status_ASC
+  status_DESC
   unit_ASC
   unit_DESC
   createdAt_ASC
@@ -790,7 +808,14 @@ enum StockOrderByInput {
 type StockPreviousValues {
   id: ID!
   quantity: Int
+  status: StockStatus
   unit: Unit
+}
+
+enum StockStatus {
+  AVAILABLE
+  LIMITED
+  OUT
 }
 
 type StockSubscriptionPayload {
@@ -815,6 +840,13 @@ input StockUpdateInput {
   listId: ListUpdateOneRequiredInput
   itemId: ItemUpdateOneRequiredInput
   quantity: Int
+  status: StockStatus
+  unit: Unit
+}
+
+input StockUpdateManyMutationInput {
+  quantity: Int
+  status: StockStatus
   unit: Unit
 }
 
@@ -843,6 +875,10 @@ input StockWhereInput {
   quantity_lte: Int
   quantity_gt: Int
   quantity_gte: Int
+  status: StockStatus
+  status_not: StockStatus
+  status_in: [StockStatus!]
+  status_not_in: [StockStatus!]
   unit: Unit
   unit_not: Unit
   unit_in: [Unit!]
@@ -1008,6 +1044,14 @@ input UserUpdateInput {
   lists: ListUpdateManyWithoutOwnerInput
   items: ItemUpdateManyWithoutOwnerInput
   permissions: PermissionUpdateManyWithoutUserIdInput
+}
+
+input UserUpdateManyMutationInput {
+  name: String
+  email: String
+  password: String
+  resetToken: String
+  resetTokenExpiry: Float
 }
 
 input UserUpdateOneRequiredWithoutItemsInput {

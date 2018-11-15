@@ -1,12 +1,11 @@
-import { QueryResolvers } from '../generated/resolvers';
-import { TypeMap } from './types/TypeMap';
+// This resolver file was scaffolded by github.com/prisma/graphqlgen, DO NOT EDIT.
+// Please do not import this file directly but copy & paste to your application code.
 
-export interface QueryParent {}
+import { QueryResolvers } from '../generated/graphqlgen';
 
-export const Query: QueryResolvers.Type<TypeMap> = {
-    tasks: (parent1, args, ctx) => {
-        return ctx.db.tasks();
+export const Query: QueryResolvers.Type = {
+    ...QueryResolvers.defaultResolvers,
+    currentUser: (parent, args, ctx) => {
+        throw new Error('Resolver not implemented');
     },
-}
-
-
+};

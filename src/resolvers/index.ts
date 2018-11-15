@@ -1,10 +1,14 @@
-import { IResolvers } from '../generated/resolvers';
-import { TypeMap } from './types/TypeMap';
+// This resolver file was scaffolded by github.com/prisma/graphqlgen, DO NOT EDIT.
+// Please do not import this file directly but copy & paste to your application code.
 
-import { Mutation } from './Mutation';
+import { Resolvers } from '../generated/graphqlgen';
+
 import { Query } from './Query';
+import { Mutation } from './Mutation';
+import { User } from './User';
 
-export const resolvers: IResolvers<TypeMap> = {
-    Mutation,
+export const resolvers: Resolvers = {
     Query,
+    Mutation,
+    User,
 };
